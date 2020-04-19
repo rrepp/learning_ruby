@@ -1,0 +1,48 @@
+Writing list of 'symbols'
+	(I'm guessing he means methods?)
+
+
+puts		-> Print stgring
+^		-> Ruby points to part of line with error
+#		-> comment
++		-> plus, string concatenation
+-		-> minus
+/		-> divide
+%		-> modulo
+*		-> multiply
+=		-> equals
+==		-> "is equal to..?"
+<		-> less than
+<=		-> less than or equal to
+>		-> greater than
+>=		-> greater than or equal to
+#{variable}	-> string interpolation
+%s.." %  [variable]-> formatted string
+
+<<SOME_WORD
+blah blah blah		-> Docstring
+SOME_WORD		
+
+\n		-> newline
+\\		-> backslash
+\t		-> tab
+gets.chomp()	-> gets input without \n
+require		-> includes another rb file
+|f|		-> variable
+
+open("http://blah") do |f|
+  f.each_line {|line| p line}		-> LOOK THIS ONE UP
+
+ARGV		-> arguments from command line
+
+STDIN		-> Standard input (typing)
+$0		-> filename
+File.open()/ File.open(".txt", 'w')
+File.close()
+File.read()
+File.write()
+File.truncate()
+
+def ... end	-> define function/method
+
+
