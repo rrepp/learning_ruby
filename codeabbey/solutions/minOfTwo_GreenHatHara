@@ -1,0 +1,59 @@
+class MinimumOfTwo
+
+  def initialize
+    @minimums = []
+  end
+
+  def execute
+    get_number_of_values
+  end
+
+  def get_number_of_values
+    puts "data: "
+    number_of_values = gets.chomp.to_i
+    looper(number_of_values)
+  end
+
+  def get_pair_values(pair_values=[])
+    puts "pairs: "
+    input_pair_values = gets.chomp
+    split_pair_values = input_pair_values.split
+    split_pair_values.each { |value| pair_values << value.to_i}
+    check_number_of_values(pair_values)
+    compare_values(pair_values)
+  end
+
+  def check_number_of_values(pair_values, number = 2)
+    if pair_values.count > number || pair_values.count < number
+      get_pair_values
+    end
+  end
+
+  def compare_values(pair_values, x=0, y=1)
+    if pair_values[x] > pair_values[y]
+      @minimums << pair_values[y]
+    elsif pair_values[x] < pair_values[y]
+      @minimums << pair_values[x]
+    else
+      puts "These are equal..."
+      get_pair_values
+    end
+  end
+
+  def looper(number_of_values)
+    number_of_values.times do
+      get_pair_values
+    end
+    display_minimums
+  end
+
+  def display_minimums
+    puts "answer: "
+    @minimums.each do |minimum_value|
+      print "#{minimum_value} "
+    end
+    puts
+  end
+end
+
+minimums = MinimumOfTwo.new.execute

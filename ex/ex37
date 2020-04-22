@@ -1,0 +1,271 @@
+keywords
+ alias
+ 	- creates an alias between two methods (and other things)
+ and
+ 	- Short-circuit Boolean with lower precedence that &&
+ BEGIN
+ 	- Runs before any other code in the current file
+ begin
+ 	- Starts an exception handling block
+ break
+ 	- Leaves a block early
+ case
+ 	- Starts a case expression
+ class
+ 	- Creates or opens a class
+ def
+ 	- Defines a method
+ defined?
+ 	- Returns a string describing its argument
+ do
+ 	- Starts a block
+ else
+ 	- The unhandled condition in case, if, and unless expressions
+ elsif
+ 	- An alternated condition for an if expression
+ END
+ 	- Runs after any other code in the current file
+ end
+ 	- The end of a syntax block. Used by classes, modules, methods, exception handling, and control expressions.
+ ensure
+ 	- Starts a section of code that is always run when an exception is raised.
+ false
+ 	- Boolean false
+ for
+ 	- A loop that is similar to using the each method
+ if
+ 	- Used for if and modifier if expressions
+ in
+ 	- Used to separate the iterable object and iterator variable in a for loop
+ module
+ 	- creates or opens a module
+ next
+ 	- Skips the rest of the block
+ nil
+ 	- A false value usually indicating "no value" or "unknown"
+ not
+ 	- Inverts the following boolean expression
+ or
+ 	- Boolean or with lower precedence than ||
+ redo
+ 	- Restarts execution in the current block
+ rescue
+ 	- Starts an exception section of code in a begin block
+ retry
+ 	- Retries an exception block
+ return
+ 	- Exits a method
+ self
+ 	- The object the current method is attached to
+ super
+	- Calls the current method in a superclass
+ then
+ 	- Indicates the end of conditional blocks in control structures
+ true
+ 	- Boolean true
+ undef
+ 	- Prevents a class or module from responding to a method call
+ unless
+ 	- Used for unless and modifier unless expressions
+ until
+ 	- Creates a loop that executes until the condition is false
+ when
+ 	- A condition in a case expression
+ while
+ 	- Creates a loop that executes while the condition is true
+ yield
+ 	- Starts execution of the block sent to the current method
+
+Data Types
+ true
+ 	- Everything that isn't false or nil
+ false
+ 	- nil or false
+ nil
+ 	- false, or no value
+ constants
+ 	- variable that does not change value
+	- these are named starting with a capital letter
+		- convention => all caps
+	- although constants should not be changed, you can modify the states of the objects they reference
+ ranges
+ 	- an interval
+	- (-1..5)  => -1, 0, 1, 2, 3, 4
+	- (-1...5) => -1, 0, 1, 2, 3, 4, 5
+
+ arrays
+ 	- 0-indexed
+	- ary = Array.new		#=> []
+	- Array.new(3)			#=> [nil, nil, nil]
+	- Array.new(3, true)		#=> [true, true, true]
+	- Array.new(4) {|i| i.to_s}	#=> ["0", "1", "2", "3"]
+
+	- arr = [1, 2, 3, 4, 5, 6]
+		- arr[2]	#=> 3
+		- arr[100]	#=> nil
+		- arr[-3]	#=> 4
+		- arr[2,3]	#=> [3, 4, 5]
+		- arr[1..4]	#=> [2. 3. 4. 5]
+		- arr[1..-3]	#=> [2, 3, 4]
+		- arr.at(0)	#=> 1
+		- arr.first	#=> 1
+		- arr.last	#=> 6
+		- arr.take(3)	#=> [1, 2, 3]
+		- arr.drop(3)	#=> [4, 5, 6]
+		- arr.length	#=> 6
+		- arr.empty?	#=> false
+		- arr.push(7)	#=> [1, 2, 3, 4, 5, 6, 7]
+		- arr << 8	#=> [1, 2, 3, 4, 5, 6, 7, 8]
+		- arr.unshift(0) #=> [0, 1, 2, 3, 4, 5, 6, 7, 8]
+		- arr.insert(3, "a"_ #=> [0, 1, 2, "a", 3, 4, 5, 6, 7, 8]
+		- arr.pop	#=> 8
+		- arr.shift	#=> 0
+	
+	- arr = ['a', 'b', 'c', 'd', 'e', 'f']
+		- arr.fetch(100)	#=> IndexError: index 1-- outside of array bounds: -6...6
+		- arr.fetch(100, "oops")	#=> "oops"
+ hashes
+ 	- dictionary like collection of key: value pairs
+	- "associative array"
+	- grades = { "Jane Doe" => 10, "Jim Doe" => 6 }
+	- options = { :font_size => 10, :font_family => "Arial"}
+		to access - options[:font_size]	#=> 10
+	- grades = Hash.new
+		- grades["Dorothy Doe"] = 9
+	- Hashes have default values
+		- can be set with argument to new:
+			- grades = Hash.new(0)
+		- or
+			- grades = {"Timmy Doe" => 5}
+			- grades.default = 0
+	- accessing a value requires using its key
+		- puts grades["Jane Doe"]
+	- Common uses
+		- books		= {}
+		- books[:matz]	= "The Ruby Language"
+		- books[:black]	= "The Well-Grounded Rubyist"
+	- Hases are commonly used as a way to have named parameters in functions
+		- Person.create(name: "John Doe", age: 27)
+		- 
+		- def self.create(params)
+		-   @name = params[:name]
+		-   @age  = params[:age]
+		- end
+
+
+String Escapes Sequences
+ \\
+ 	- backslash
+ \'
+ 	- single quote
+ \"
+ 	- double quote
+ \a
+ 	- alert/beep
+ \b
+ 	- backspace
+ \f
+ 	- formfeed page break
+ \n
+ 	- newline
+ \r
+ 	- carriage return
+ \t
+ 	- tab
+ \v
+ 	- vertical tab
+
+Operators
+ ?
+	- ternary operator
+		- condition ? true : false
+ ::
+ 	-  namespace resolution operator
+ []
+ 	- array
+ **
+ 	- exponent
+ - (unary)
+ 	- 
+ + (unary)
+ 	- 
+ !
+ 	- not
+ ~
+ 	- 
+ *
+ 	- multiply
+	- splat operator
+		- converts array to list
+ /
+ 	- divide
+ %
+ 	- modulo
+ +
+ 	- add
+ -
+ 	- subtract
+ <<
+ 	- shovel/push operator
+		- alias for push method
+		- appends to end of string
+		- left shift for integers
+			- shifts bits by some amount
+ >>
+ 	- right shift
+ &
+ 	- converts Proc object to block
+	- converts block and non Proc objects to Proc
+ |
+ 	- | variable | yields variable to a block
+		- { |x| x**2 }
+ >
+ 	- greater than
+ >=
+ 	- greater than or equal
+ <
+ 	- less than
+ <=
+ 	- less than or equal
+ <=>
+ 	- spaceship operator 
+ 	- greater equal or less
+ ==
+ 	- equals
+ ===
+ 	- more than equality
+	- compares classes
+ !=
+ 	- not equal
+ =~
+ 	- match operator
+		- returns index of first match
+		ie:
+		"3oranges" =~ /[0-9]/	<- find 0-9 in string
+		# 0			<- at index 0
+ !~
+ 	- not match operator
+ &&
+ 	- and
+ ||
+ 	- or
+ ..
+ 	- range, exclusive
+ ...
+ 	- range, inclusive
+ &.
+ 	- save navigator
+	- instead of:
+		if user && user.active
+		  # ...
+		end
+	- better way:
+		if user&.active
+		  # ...
+		end
+	- Here, only calls active method on non-nil users
+ ~>
+ 	- pessimistic operator
+	- gem 'rails', '~> 3.0.3'
+		- this will install 3.0.3 <= version  < 3.1
+

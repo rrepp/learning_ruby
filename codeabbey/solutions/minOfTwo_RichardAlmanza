@@ -1,0 +1,132 @@
+#! /usr/bin/crystal
+
+# $ ameba richardalmanza.cr #Linting
+# Inspecting 1 file.
+# .
+# Finished in 6.34 milliseconds
+# 1 inspected, 0 failures.
+# $ crystal build richardalmanza.cr --release
+
+require "option_parser"
+
+version = "0.1"
+
+class Rearranger
+  @@n_arrays = 1
+  @@maximum = false
+  @@minimum = false
+  @@args = [] of String
+  @@arrays = [] of Array(String)
+
+  def self.n_arrays(n_arrays : UInt16)
+    @@n_arrays = n_arrays
+    @@n_arrays = 1 if @@n_arrays == 0
+  end
+
+  def self.args(@@args)
+  end
+
+  def self.max(@@maximum)
+  end
+
+  def self.min(@@minimum)
+  end
+
+  def self.arrays
+    @@arrays
+  end
+
+  def self.rearrange
+    args = @@args
+    args = args[-1].split('\n') if args.size == 1
+    args = args.map { |x| x.split(' ') }
+    args = args.flatten
+
+    (0...args.size).step(@@n_arrays).each do |rows|
+      temp_a = [] of String
+      (0...@@n_arrays).each do |columns|
+        temp_a << args[rows + columns] if (rows + columns) < args.size
+      end
+      @@arrays << temp_a
+    end
+  end
+
+  def self.find_mx_mn(array : Array(String))
+    max = ""
+    min = ""
+
+    array.each do |x|
+      begin
+        num = x.try &.to_i
+      rescue ArgumentError
+        next
+      end
+      max = min = num if min.is_a?(String) || max.is_a?(String)
+      max = num if num > max
+      min = num if num < min
+    end
+
+    "#{max if @@maximum} #{min if @@minimum}"
+  end
+
+  def self.min_max
+    oput = ""
+
+    if @@n_arrays == 1
+      oput = self.find_mx_mn @@arrays.flatten
+    else
+      @@arrays.each do |list|
+        oput = "#{oput} #{self.find_mx_mn list}"
+      end
+    end
+
+    oput
+  end
+end
+
+OptionParser.parse do |parser|
+  parser.banner = "Max Min of Array!\n" \
+                  "a program to practice and learn Crystal Language\n" \
+                  "file.cr -- [-M |-m] [-n #] -- number number number\n" \
+                  "[Example] mxmn.cr -- -M -- 023 56 112 0\n" \
+                  "[Expected] 112\n\n" \
+                  "[Weird Stuff] mxmn.cr -- -M -m -n 3 -- -9 6 q -6 -9 h \n" \
+                  "[Expected] 6 -9 -6 -9\n" \
+                  "Letters are ignored. ouput is (Max Min) per row "
+
+  parser.on "-v", "--version", "Show version" do
+    puts "Version => #{version}"
+    exit
+  end
+
+  parser.on "-h", "--help", "Show help" do
+    puts parser
+    exit
+  end
+
+  parser.on "-n a", "--n-arrays NUMBER", "Specifies the number of columns" do |n|
+    Rearranger.n_arrays n.to_u16 if /^[0-9]*$/.match(n)
+  end
+
+  parser.on "-M", "--maximum", "Will show maximum per row" do
+    Rearranger.max true
+  end
+
+  parser.on "-m", "--minimum", "Will show minimum per row" do
+    Rearranger.min true
+  end
+
+  parser.invalid_option do |option_flag|
+    STDERR.puts "Invalid option #{option_flag}"
+    STDERR.puts ""
+    puts parser
+    exit(1)
+  end
+end
+
+Rearranger.args ARGV
+Rearranger.rearrange
+puts Rearranger.min_max .gsub(/\ +/, " ") .gsub(/^\ /, "")
+
+# $ ./richardalmanza.cr -- -M -m -- $(cat DATA.lst)
+# 79241 5214

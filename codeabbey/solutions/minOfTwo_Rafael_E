@@ -1,0 +1,35 @@
+module ProcessInput
+
+  def self.process filepath, option = nil
+    file = File.open(filepath, 'r')
+    arr = []
+
+    action = choose_action(option)
+    until file.eof?
+      arr << action.call(file.readline)
+    end
+    arr.length == 1 ? arr.flatten : arr
+  end
+
+  private
+  def self.choose_action option
+    case option
+    when :chop_split_to_i
+      action = Proc.new { |line| line.chop.split(' ').map{ |v| v.to_i } }
+    when :space_sep_nums_to_arr
+      action = Proc.new { |list| list.split(' ').map { |v| v.to_i } }
+    end
+    action
+  end
+
+end
+
+def minimum_of_two a, b
+  return nil if a == b
+  return (a < b ? a : b)
+end
+
+def process_minimums_of_two(file)
+  arr = ProcessInput.process(file, :chop_split_to_i)
+  arr.map{ |nums| minimum_of_two nums[0], nums[1] }
+end

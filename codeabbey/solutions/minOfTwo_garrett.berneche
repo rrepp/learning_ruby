@@ -1,0 +1,36 @@
+class Minimizer
+  def initialize(x, y)
+    @x = x
+    @y = y
+  end
+
+  def get_min()
+    return @x < @y ? @x : @y
+  end
+end
+
+class Executor
+  def execute
+    inputs = get_inputs
+    outputs = inputs.collect { |m| m.get_min }
+    puts outputs.join(' ')
+  end
+
+  def get_inputs()
+    inputs = ARGV[0].split(' ')
+    count_of_inputs = inputs.shift.to_i
+
+    arr = Array.new()
+    count_of_inputs.times do |i|
+      arr.push(Minimizer.new(inputs.shift.to_i, inputs.shift.to_i))
+    end
+    return arr
+  end
+
+  def get_min(x, y)
+    return (x < y) ? x : y
+  end
+end
+
+
+Executor.new.execute
